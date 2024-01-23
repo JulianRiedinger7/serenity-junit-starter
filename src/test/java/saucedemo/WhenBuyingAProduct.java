@@ -1,6 +1,7 @@
 package saucedemo;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
@@ -24,9 +25,13 @@ public class WhenBuyingAProduct {
   CompletePage complete;
   HomePage home;
 
+  @BeforeEach
+  public void setup() {
+    login.with(Credential.STANDARD_USER);
+  }
+
   @Test
   public void userShouldBeAbleToPurchaseAProduct() {
-    login.with(Credential.STANDARD_USER);
     purchase.addToCart(1);
 
     Serenity.reportThat("The cart badge should include the correct number",
